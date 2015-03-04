@@ -52,6 +52,9 @@ if [[ "$platform" == "mac" ]]; then
 	export PS0="$WHITE$THEREFORE$WHITE_ON_GREEN\u$CLEAR$BLUE@$GREEN_ON_GRAY\h$CLEAR $ORANGE\w %{$GRAY_BG$LBRACKET$BRANCH $YELLOW%b 	$GREEN%c$PURPLE%u$RED%f$CLEAR$RBRACKET%}$CLEAR $WHITE$ARROW$CLEAR "
 	export PROMPT_COMMAND='export PS1=$("$HOME"/bin/gitprompt.pl c='"$SYM_ADDED"' u='"$SYM_CHANGE"' f='"$SYM_NEW"' statuscount=1 keepempty=0)'
 else
+	GIT_PROMPT_ONLY_IN_REPO=1
+	GIT_PROMPT_THEME=Solarized
+	source ~/bin/bash-git-prompt/gitprompt.sh
 	export PS1="$WHITE$THEREFORE$WHITE_ON_GREEN\u$CLEAR$BLUE@$GREEN_ON_GRAY\h$CLEAR $ORANGE\w$CLEAR $WHITE$ARROW$CLEAR "
 fi
 
