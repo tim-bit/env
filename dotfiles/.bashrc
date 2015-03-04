@@ -2,6 +2,12 @@
 PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
+platform="linux"
+uname=`uname`
+if [[ "$uname" == "Darwin" ]]; then
+	platform="mac"
+fi
+
 # enable terminal colors
 export CLICOLOR=1
 
@@ -42,12 +48,20 @@ SYM_CHANGE=`echo -e "\xE2\x88\x86"`
 SYM_NEW=`echo -e "\xE2\x9F\xA1"`
 SYM_ADDED=`echo -e "\xE2\x98\x85"`
 
-export PS0="$WHITE$THEREFORE$WHITE_ON_GREEN\u$CLEAR$BLUE@$GREEN_ON_GRAY\h$CLEAR $ORANGE\w %{$GRAY_BG$LBRACKET$BRANCH $YELLOW%b $GREEN%c$PURPLE%u$RED%f$CLEAR$RBRACKET%}$CLEAR $WHITE$ARROW$CLEAR "
-export PROMPT_COMMAND='export PS1=$(/Users/Tim/bin/gitprompt.pl c='"$SYM_ADDED"' u='"$SYM_CHANGE"' f='"$SYM_NEW"' statuscount=1 keepempty=0)'
+if [[ "$platform" == "mac" ]]; then
+	export PS0="$WHITE$THEREFORE$WHITE_ON_GREEN\u$CLEAR$BLUE@$GREEN_ON_GRAY\h$CLEAR $ORANGE\w %{$GRAY_BG$LBRACKET$BRANCH $YELLOW%b 	$GREEN%c$PURPLE%u$RED%f$CLEAR$RBRACKET%}$CLEAR $WHITE$ARROW$CLEAR "
+	export PROMPT_COMMAND='export PS1=$("$HOME"/bin/gitprompt.pl c='"$SYM_ADDED"' u='"$SYM_CHANGE"' f='"$SYM_NEW"' statuscount=1 keepempty=0)'
+else
+	export PS1="$WHITE$THEREFORE$WHITE_ON_GREEN\u$CLEAR$BLUE@$GREEN_ON_GRAY\h$CLEAR $ORANGE\w$CLEAR $WHITE$ARROW$CLEAR "
+fi
 
 # sv command
 #sv() { [[ -d $1 ]] && cd $1 || CMD=`printf "'vim %s'" $1` && echo $CMD | xargs tmux new-window -n $1;}
-alias sv="mate"
+if [[ "$platform" == "mac" ]]; then
+	alias sv="mate"
+else
+	alias sv="rmate"
+fi
 
 
 # up command
@@ -73,5 +87,7 @@ function up() {
 	fi
 }
 
-PERL_MB_OPT="--install_base \"/Users/Tim/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/Tim/perl5"; export PERL_MM_OPT;
+if [[ "$platform" == "mac" ]]; then
+	PERL_MB_OPT="--install_base \"/Users/Tim/perl5\""; export PERL_MB_OPT;
+	PERL_MM_OPT="INSTALL_BASE=/Users/Tim/perl5"; export PERL_MM_OPT;
+fi

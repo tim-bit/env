@@ -19,6 +19,7 @@ done
 
 echo
 echo "Symlinking scripts from $repo/scripts"
+mkdir -p "$HOME/bin"
 for location in $(find scripts/* -maxdepth 1 -exec basename {} \;); do
 	file="${location##*/}"
 	file="${file%.sh}"
