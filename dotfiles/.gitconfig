@@ -1,0 +1,44 @@
+[core]
+	pager = less -RciqMSj5
+	excludesfile = /Users/Tim/.gitignore_global
+	
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+	
+[user]
+	name = Tim Kuminecz
+	email = tkuminecz@synacor.com
+	
+[color]
+branch = auto
+diff = auto
+status = auto
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+	
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+	
+[alias]
+	a = add
+	b = branch -v
+	co = checkout
+	d = diff
+	df = diff --name-status --histogram
+	l = !git log --graph --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %an' | less -RciqmSj5
+	m = merge --no-ff
+	s = status -uall -s
+	who = !git shortlog --no-merges -s -- | sort -nr
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
