@@ -59,11 +59,13 @@ else
 fi
 
 # sv command
-#sv() { [[ -d $1 ]] && cd $1 || CMD=`printf "'vim %s'" $1` && echo $CMD | xargs tmux new-window -n $1;}
+svim() { [[ -d $1 ]] && cd $1 || CMD=`printf "'vim %s'" $1` && echo $CMD | xargs tmux new-window -n $1;}
 if [[ "$platform" == "mac" ]]; then
 	alias sv="mate"
+	alias ssv="sudo /Users/Tim/bin/mate"
 else
 	alias sv="rmate"
+	alias ssv="sudo /home/tim/bin/rmate"
 fi
 
 
