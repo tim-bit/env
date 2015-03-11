@@ -15,7 +15,7 @@ export CLICOLOR=1
 test -e ~/.dircolors && eval `dircolors -b ~/.dir_colors`
 
 # aliases
-alias ls="ls -h"
+alias ls="ls -h --color"
 alias ll="ls -l"
 alias la="ls -a"
 alias lla="ll -a"
