@@ -62,10 +62,10 @@ fi
 svim() { [[ -d $1 ]] && cd $1 || CMD=`printf "'vim %s'" $1` && echo $CMD | xargs tmux new-window -n $1;}
 if [[ "$platform" == "mac" ]]; then
 	alias sv="mate"
-	alias ssv="sudo /Users/Tim/bin/mate"
+	alias ssv="sudo /Users/$USER/bin/mate"
 else
 	alias sv="rmate"
-	alias ssv="sudo /home/tim/bin/rmate"
+	alias ssv="sudo /home/$USER/bin/rmate"
 fi
 
 
