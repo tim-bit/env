@@ -32,6 +32,7 @@ status = auto
 	co = checkout
 	d = diff
 	df = diff --name-status --histogram
+	f = fetch
 	l = log --graph --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %an'
 	m = merge --no-ff
 	s = status -uall -s
