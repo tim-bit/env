@@ -1,6 +1,6 @@
 [core]
 	pager = less -RciqMSj5
-	excludesfile = /Users/Tim/.gitignore_global
+	excludesfile = /Users/tkuminecz/.gitignore_global
 	
 [filter "hawser"]
 	clean = git hawser clean %f
@@ -27,14 +27,15 @@ status = auto
 	untracked = cyan
 	
 [alias]
-	a = add
-	b = branch -v
-	co = checkout
-	d = diff
-	df = diff --name-status --histogram
-	l = !git log --graph --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %an' | less -RciqmSj5
-	m = merge --no-ff
-	s = status -uall -s
+	a   = add
+	b   = branch -v
+	co  = checkout
+	d   = diff
+	df  = diff --name-status --histogram
+	f   = fetch
+	l   = log --graph --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %an'
+	m   = merge --no-ff
+	s   = status -uall -s
 	who = !git shortlog --no-merges -s -- | sort -nr
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
@@ -44,3 +45,7 @@ status = auto
 	trustExitCode = true
 [push]
 	default = simple
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
