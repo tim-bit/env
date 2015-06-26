@@ -15,7 +15,11 @@ export CLICOLOR=1
 test -e ~/.dircolors && eval `dircolors -b ~/.dir_colors`
 
 # aliases
-alias ls="ls -h --color"
+if [[ "$platform" == "mac" ]]; then
+	alias ls="ls -hC"
+else
+	alias ls="ls -h --color"
+fi
 alias ll="ls -l"
 alias la="ls -a"
 alias lla="ll -a"
@@ -25,38 +29,8 @@ alias rgrep="grep -r"
 alias tree="tree -C"
 alias hosts="sudo hostfiles --interactive"
 
-# prompt
-WHITE="\[\e[37m\]"
-WHITE_ON_GREEN="\[\e[37;46m\]"
-GRAY="\[\e[30m\]"
-RED="\[\e[31m\]"
-ORANGE="\[\e[33m\]"
-YELLOW="\[\e[32m\]"
-GREEN="\[\e[36m\]"
-GREEN_ON_GRAY="\[\e[36;40m\]"
-BLUE="\[\e[34m\]"
-PURPLE="\[\e[35m\]"
-CLEAR="\e[0m"
-GRAY_BG="\[\e[;40m\]"
-
-ARROW=`echo -e "\xE2\x86\xB3"`
-THEREFORE=`echo -e "\xE2\x88\xB4"`
-BRANCH=`echo -e "\xE2\x8C\xA5"`
-LBRACKET=`echo -e "\xE2\x9F\xAE"`
-RBRACKET=`echo -e "\xE2\x9F\xAF"`
-SYM_CHANGE=`echo -e "\xE2\x88\x86"`
-SYM_NEW=`echo -e "\xE2\x9F\xA1"`
-SYM_ADDED=`echo -e "\xE2\x98\x85"`
-
-if [[ "$platform" == "mac" ]]; then
-	export PS0="$WHITE$THEREFORE$WHITE_ON_GREEN\u$CLEAR$BLUE@$GREEN_ON_GRAY\h$CLEAR $ORANGE\w %{$GRAY_BG$LBRACKET$BRANCH $YELLOW%b 	$GREEN%c$PURPLE%u$RED%f$CLEAR$RBRACKET%}$CLEAR $WHITE$ARROW$CLEAR "
-	export PROMPT_COMMAND='export PS1=$("$HOME"/bin/gitprompt.pl c='"$SYM_ADDED"' u='"$SYM_CHANGE"' f='"$SYM_NEW"' statuscount=1 keepempty=0)'
-else
-	GIT_PROMPT_ONLY_IN_REPO=1
-	GIT_PROMPT_THEME=Solarized
-	source ~/bin/bash-git-prompt/gitprompt.sh
-	export PS1="$WHITE$THEREFORE$WHITE_ON_GREEN\u$CLEAR$BLUE@$GREEN_ON_GRAY\h$CLEAR $ORANGE\w$CLEAR $WHITE$ARROW$CLEAR "
-fi
+# Only load Liquid Prompt in interactive shells, not from a script or from scp
+[[ $- = *i* ]] && source ~/liquidprompt/liquidprompt
 
 # sv command
 svim() { [[ -d $1 ]] && cd $1 || CMD=`printf "'vim %s'" $1` && echo $CMD | xargs tmux new-window -n $1;}

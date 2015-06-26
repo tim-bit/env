@@ -25,3 +25,5 @@ for location in $(find scripts/* -maxdepth 1 -exec basename {} \;); do
 	file="${file%.sh}"
 	link "$repo/scripts/$location" "$HOME/bin/$location"
 done
+
+ln -s liquidprompt $HOME/liquidprompt
